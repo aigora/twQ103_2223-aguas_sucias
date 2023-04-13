@@ -4,16 +4,16 @@
 
 ## Integrantes del equipo
 Claudia Aguilar García
-Usuario de github: claudiaaguilar
+ claudiaaguilar
 
 Paula Zapata García
-Usuario de github: paulazaga
+ paulazaga
 
 Alejandro López Gallego
-Usuario de github: alelopez14
+alelopez14
 
 Javier Martínez Fernández
-Usuario de github: Reiwaj
+Reiwaj
 
 ## Objetivos del trabajo
 
