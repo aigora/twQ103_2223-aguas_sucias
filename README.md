@@ -1,18 +1,18 @@
 # Medio Ambiente
 
-[Descripción breve del proyecto a realizar (2-3 frases).]
+[DescripciÃ³n breve del proyecto a realizar (2-3 frases).]
 
 ## Integrantes del equipo
-Claudia Aguilar García
+Claudia Aguilar Garcia
  claudiaaguilar
 
-Paula Zapata García
+Paula Zapata Garcia
  paulazaga
 
-Alejandro López Gallego
+Alejandro Lopez Gallego
 alelopez14
 
-Javier Martínez Fernández
+Javier Martinez Hernandez
 Reiwaj
 
 ## Objetivos del trabajo
