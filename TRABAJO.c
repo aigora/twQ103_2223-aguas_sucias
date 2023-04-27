@@ -7,27 +7,42 @@ struct Tbarrios {
 	int conductividad;
 	int turbidez;
 };
+float MediaPh(float);
+
 int main () {
+	/* FILE *dfe,*dfs; // datos de las fuentes (fichero de entrada con el modo read) y datos de fuentes (fichero de salida con el modo write)
+	
+	dfe = fopen("202211_Coslada.csv", "r");
+	
+	if (dfe == NULL) {
+		printf("Error, no puede abrirse el fichero.\n");   
+		return 0;
+	} 
+	*/
+	
+	
 	char opcion;
+	int opcion1,eleccion;
 	int i;
 	do {
 		printf("Seleccione el barrio del cual desee obtener informacion:\n");
-		printf("C.Coslada\n");
-		printf("Q.Quintana\n");
-		printf("E.Embajadores\n");
-		printf("S.San blas\n");
-		printf("B.Berruguete\n");
-		printf("P.Pacifico\n");
-		printf("V.Vallehermoso\n");
-		printf("T.Trafalgar\n");
-		printf("A.Atocha\n");
-		printf("L.Legazpi\n");
+		printf("C.Coslada (20 fuentes)\n");
+		printf("Q.Quintana (15 fuentes)\n");
+		printf("E.Embajadores (26 fuentes)\n");
+		printf("S.San blas (10 fuentes)\n");
+		printf("B.Berruguete (21 fuentes)\n");
+		printf("P.Pacifico (18 fuentes)\n");
+		printf("V.Vallehermoso (16 fuentes)\n");
+		printf("T.Trafalgar (24 fuentes)\n");
+		printf("A.Atocha (14 fuentes)\n");
+		printf("L.Legazpi (22 fuentes)\n");  //¿Hay que poner mas barrios o asi con 10 esta bien?
 		scanf("%c", &opcion);
 		fflush(stdin);
 		
 		if((opcion=='C') || (opcion == 'Q') || (opcion == 'E') || (opcion == 'S') || (opcion == 'B') || (opcion == 'P') || (opcion == 'V') ||(opcion == 'T')|| (opcion == 'A')||(opcion == 'L')){
 			if(opcion =='C'){
-			system("cls");
+				
+				system("cls");
 				do {
 				printf("Has seleccionado Coslada\n");
 				printf("Seleccione una opcion:\n");
@@ -89,7 +104,7 @@ int main () {
 					system("cls");	
 				}
 			break;
-			if(opcion == 'S'){
+			} else if(opcion == 'S'){
 				system("cls");
 				printf("Has seleccionado San Blas\n");
 				printf("Seleccione una opcion:\n");
@@ -97,9 +112,8 @@ int main () {
 				printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
 				printf("3.Graficar funciones(seleccione parametro a graficar(pH,conductividad))\n");
 				printf("4.Salir del programa\n");
-			}
-			break;
-			if(opcion == 'A'){
+				break;
+			} else if(opcion == 'A'){
 				system("cls");
 				printf("Has seleccionado Atocha\n");
 				printf("Seleccione una opcion:\n");
@@ -107,9 +121,8 @@ int main () {
 				printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
 				printf("3.Graficar funciones(seleccione parametro a graficar(pH,conductividad))\n");
 				printf("4.Salir del programa\n");
-			break;
-			}
-			if(opcion == 'T'){
+				break;
+			} else if(opcion == 'T'){
 				system("cls");
 				printf("Has seleccionado Trafalgar\n");
 				printf("Seleccione una opcion:\n");
@@ -117,9 +130,8 @@ int main () {
 				printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
 				printf("3.Graficar funciones(seleccione parametro a graficar(pH,conductividad))\n");
 				printf("4.Salir del programa\n");
-			break;
-			}
-			if(opcion == 'L'){
+				break;
+			} else if(opcion == 'L'){
 				system("cls");
 				printf("Has seleccionado Legazpi\n");
 				printf("Seleccione una opcion:\n");
@@ -127,9 +139,8 @@ int main () {
 				printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
 				printf("3.Graficar funciones(seleccione parametro a graficar(pH,conductividad))\n");
 				printf("4.Salir del programa\n");
-			break;
-			}
-			if(opcion == 'V'){
+				break;
+			}else if(opcion == 'V'){
 				system("cls");
 				printf("Has seleccionado Vallehermoso\n");
 				printf("Seleccione una opcion:\n");
@@ -137,9 +148,8 @@ int main () {
 				printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
 				printf("3.Graficar funciones(seleccione parametro a graficar(pH,conductividad))\n");
 				printf("4.Salir del programa\n");
-			break;
-			}
-			if(opcion == 'B'){
+				break;
+			} else if(opcion == 'B'){
 				system("cls");
 				printf("Has seleccionado Berruguete\n");
 				printf("Seleccione una opcion:\n");
@@ -147,9 +157,8 @@ int main () {
 				printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
 				printf("3.Graficar funciones(seleccione parametro a graficar(pH,conductividad))\n");
 				printf("4.Salir del programa\n");
-			break;
-			}
-			if(opcion == 'P'){
+				break;
+			} else if(opcion == 'P'){
 				system("cls");
 				printf("Has seleccionado Pacifico\n");
 				printf("Seleccione una opcion:\n");
@@ -157,9 +166,8 @@ int main () {
 				printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
 				printf("3.Graficar funciones(seleccione parametro a graficar(pH,conductividad))\n");
 				printf("4.Salir del programa\n");
-			break;
-			}
-			if(opcion == 'Q'){
+				break;
+			} else if(opcion == 'Q'){
 				system("cls");
 				printf("Has seleccionado Quintana\n");
 				printf("Seleccione una opcion:\n");
@@ -167,9 +175,8 @@ int main () {
 				printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
 				printf("3.Graficar funciones(seleccione parametro a graficar(pH,conductividad))\n");
 				printf("4.Salir del programa\n");
-			break;
-			}
-			if(opcion == 'E'){
+				break;
+			} else if(opcion == 'E'){
 				system("cls");
 				printf("Has seleccionado Embajadores\n");
 				printf("Seleccione una opcion:\n");
@@ -177,18 +184,15 @@ int main () {
 				printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
 				printf("3.Graficar funciones(seleccione parametro a graficar(pH,conductividad))\n");
 				printf("4.Salir del programa\n");
-			break;
+				break;
 			}
 	
 	} else{
 		printf("Letra no valida.Vuelve a introducir la letra\n");
 		}
-	
-	} while((opcion=='C') || (opcion == 'Q') || (opcion == 'E') || (opcion == 'S') || (opcion == 'B') || (opcion == 'P') || (opcion == 'V') || (opcion == 'T') || (opcion == 'A') || (opcion == 'L'));
-	
+	} while((opcion!='C') || (opcion != 'Q') || (opcion != 'E') || (opcion != 'S') || (opcion != 'B') || (opcion != 'P') || (opcion != 'V') ||(opcion != 'T')|| (opcion != 'A')||(opcion != 'L'));
 	
 	return 0;
-
+	
 }
-
 
