@@ -2,28 +2,29 @@
 #include <stdlib.h>
 
 struct Tbarrios {
-	float ph;
-	int coliformes;
-	int conductividad;
-	int turbidez;
+	float ph[500];
+	int coliformes[500];
+	int conductividad[500];
+	int turbidez[500];
 };
-float MediaPh(float);
+
+float MediaPh(float[],int); //funcion que nos calcula la media del ph de todas las fuentes
 
 int main () {
-	/* FILE *dfe,*dfs; // datos de las fuentes (fichero de entrada con el modo read) y datos de fuentes (fichero de salida con el modo write)
 	
-	dfe = fopen("202211_Coslada.csv", "r");
+	int i;
+	
+	FILE *dfe; // datos de las fuentes (fichero de entrada con el modo read) y datos de fuentes (fichero de salida con el modo write)
+	
+	dfe = fopen("202211_Coslada.csv.txt", "r");
 	
 	if (dfe == NULL) {
 		printf("Error, no puede abrirse el fichero.\n");   
 		return 0;
 	} 
-	*/
-	
-	
+
 	char opcion;
 	int opcion1,eleccion;
-	int i;
 	do {
 		printf("Seleccione el barrio del cual desee obtener informacion:\n");
 		printf("C.Coslada (20 fuentes)\n");
@@ -35,7 +36,7 @@ int main () {
 		printf("V.Vallehermoso (16 fuentes)\n");
 		printf("T.Trafalgar (24 fuentes)\n");
 		printf("A.Atocha (14 fuentes)\n");
-		printf("L.Legazpi (22 fuentes)\n");  //¿Hay que poner mas barrios o asi con 10 esta bien?
+		printf("L.Legazpi (22 fuentes)\n");  
 		scanf("%c", &opcion);
 		fflush(stdin);
 		
@@ -65,7 +66,17 @@ int main () {
 						printf("6.Fuentes con la misma conductividad\n");
 						scanf("%d", &eleccion);
 						
+						
 						if(eleccion == 1) {
+							struct Tbarrios fuentes[500];
+							i = 0;
+							while (fscanf(dfe,"%f %d %d %d", &fuentes[i].ph, &fuentes[i].coliformes, &fuentes[i].conductividad, &fuentes[i].turbidez) != EOF){
+								printf("%f\n", fuentes[i].ph);
+								 MediaPh(fuentes[i].ph , 20);
+								i++;
+							}
+							fclose(dfe);
+							printf("La media del pH es: %f",MediaPh);
 							
 						}else if(eleccion ==2) {
 							
@@ -192,7 +203,19 @@ int main () {
 		}
 	} while((opcion!='C') || (opcion != 'Q') || (opcion != 'E') || (opcion != 'S') || (opcion != 'B') || (opcion != 'P') || (opcion != 'V') ||(opcion != 'T')|| (opcion != 'A')||(opcion != 'L'));
 	
-	return 0;
 	
+
+	return 0;	
+}
+
+float MediaPh(float v[], int dim)  {     // funcion generica tanto como si son 5 elementos como si son 7 elementos ---> IMPORTANTE
+	int i;
+	float media =0;
+	
+	for(i=0;i<dim;i++) {   //no hay ninguna marca que me indique que el vector termina en el \0 por ejemplo como en las cadenas,por eso ponemos la dimension(dim) que ademas tambien tendra que entrar como parametro a la funcion
+		media += v[i];
+	}
+	return (media/dim);
+
 }
 
