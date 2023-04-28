@@ -2,18 +2,21 @@
 #include <stdlib.h>
 
 struct Tbarrios {
-	float ph[500];
-	int coliformes[500];
-	int conductividad[500];
-	int turbidez[500];
+	char nombre[50];
+	float ph;
+	int coliformes;
+	int conductividad;
+	int turbidez;
 };
 
 float MediaPh(float[],int); //funcion que nos calcula la media del ph de todas las fuentes
 
 int main () {
 	
-	int i;
+	struct Tbarrios fuentes[500];
 	
+	int i=0;
+	// Abrir el fichero
 	FILE *dfe; // datos de las fuentes (fichero de entrada con el modo read) y datos de fuentes (fichero de salida con el modo write)
 	
 	dfe = fopen("202211_Coslada.csv.txt", "r");
@@ -22,6 +25,12 @@ int main () {
 		printf("Error, no puede abrirse el fichero.\n");   
 		return 0;
 	} 
+	while (fscanf(dfe,"%s %f %d %d %d", fuentes[i].nombre,&fuentes[i].ph, &fuentes[i].coliformes, &fuentes[i].conductividad, &fuentes[i].turbidez) != EOF){
+		/*printf("%s %f %d %d %d\n", fuentes[i].nombre,&fuentes[i].ph, &fuentes[i].coliformes, &fuentes[i].conductividad, &fuentes[i].turbidez);*/
+		
+		i++;
+	}
+	fclose(dfe);
 
 	char opcion;
 	int opcion1,eleccion;
@@ -66,16 +75,9 @@ int main () {
 						printf("6.Fuentes con la misma conductividad\n");
 						scanf("%d", &eleccion);
 						
-						
 						if(eleccion == 1) {
-							struct Tbarrios fuentes[500];
-							i = 0;
-							while (fscanf(dfe,"%f %d %d %d", &fuentes[i].ph, &fuentes[i].coliformes, &fuentes[i].conductividad, &fuentes[i].turbidez) != EOF){
-								printf("%f\n", fuentes[i].ph);
-								 MediaPh(fuentes[i].ph , 20);
-								i++;
-							}
-							fclose(dfe);
+							/*MediaPh(fuentes[i].ph , 20);*/
+							printf("%s %f %d %d %d\n", fuentes[i].nombre,&fuentes[i].ph, &fuentes[i].coliformes, &fuentes[i].conductividad, &fuentes[i].turbidez);
 							printf("La media del pH es: %f",MediaPh);
 							
 						}else if(eleccion ==2) {
@@ -89,8 +91,7 @@ int main () {
 						}else if(eleccion ==6) {
 							
 						}
-						
-						
+					
 						break;
 					case 2:
 						system("cls");
