@@ -1,12 +1,12 @@
 Fuente_1 7.00 120 0 1
 Fuente_2 6.20 178 1 0
-Fuente_3 5.95 258	1 0
-Fuente_4 7.05 126	0 1
-Fuente_5 7.34 189	2 0
-Fuente_6 6.86 189	1 0
+Fuente_3 5.95 258 1 0
+Fuente_4 7.05 126 0 1
+Fuente_5 7.34 189 2 0
+Fuente_6 6.86 189 1 0
 Fuente_7 7.05 284 5 0
 Fuente_8 7.00 124 1 1
-Fuente_9 6.94 126	0 0
+Fuente_9 6.94 126 0 0
 Fuente_10 8.23 153 1 0
 Fuente_11 5.16 144 0 1
 Fuente_12 7.67 157 1 0
