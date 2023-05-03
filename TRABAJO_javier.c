@@ -11,35 +11,42 @@ typedef struct {
     int coliformes;
 } Barrio;
 
-float ComparacionPh(Barrio fuentes[], int num_fuentes){
-	int i;
-    float mayorPh = 0;
-     /*for(i=0;i<num_fuentes;i++){
-    	if(fuentes[i].ph>=fuentes[i+1].ph){
-		
-    	mayorPh=fuentes[i].ph;
-		}else if(fuentes[i].ph<=fuentes[i+1].ph){
-        mayorPh=fuentes[i+1].ph;
-		}
-		return mayorPh;
-	
-	}*/
-    if (fuentes[0].ph>fuentes[1].ph){
-    	mayorPh=fuentes[0].ph;
-	}else{
-		mayorPh=fuentes[1].ph;
-	};
-
-    for(i=2;i<num_fuentes;i++){
-    	if(fuentes[i].ph>=mayorPh){
-		
-    	mayorPh=fuentes[i].ph;
-		}
-	
-		
-		return mayorPh;//PREGUNTAR QUE TA MAL
-	}
+float comparacionpH(Barrio fuentes[], int num_fuentes) {
+    float max_ph = 0.0;
+    int i;
+    for (i = 0; i < num_fuentes; i++) {
+        if (fuentes[i].ph > max_ph) {
+            max_ph = fuentes[i].ph;
+        }
+    }
+    return max_ph;
 }
+
+float comparacionConductividad(Barrio fuentes[], int num_fuentes) {
+    float mayor_conductividad = fuentes[0].conductividad;
+    int i;
+    for (i = 1; i < num_fuentes; i++) {
+        if (fuentes[i].conductividad > mayor_conductividad) {
+            mayor_conductividad = fuentes[i].conductividad;
+        }
+    }
+    return mayor_conductividad;
+}
+
+
+/*int comparacionconductividad(Barrio fuentes[], int num_fuentes) {
+    int max_conductividad = 0;
+    int i;
+    for (i = 0; i < num_fuentes; i++) {
+        if (fuentes[i].conductividad > max_conductividad) {
+            max_conductividad = fuentes[i].conductividad;
+        }
+    }
+    return max_conductividad;
+}*/
+
+
+
 void funcionmenu(){
 	
     char palabra[] ="    ***           ***  *********  *******    **   ********  ";
@@ -125,7 +132,7 @@ float calcular_sumatorio_conductividad(Barrio fuentes[], int num_fuentes) {
 }
 int main() {
     Barrio Fuentes[MAX_FUENTES];
-    int i = 0,contador=-1, opcion, segundaopcion;
+    int i = 0,contador=-1, opcion, segundaopcion, cuartaopcion;
     char nombrefichero[100];
     funcionmenu();
     
@@ -188,8 +195,22 @@ int main() {
 	}else if(opcion == 2) {
 		
 	}else if(opcion==3) {
-		  float mayorPh= ComparacionPh(Fuentes, contador+1);
-		printf("El mayor pH es: %f\n", mayorPh);
+		printf("Selecciona una opcion:\n");
+		printf("1.Imprimir mayor pH\n");
+		printf("2.Imprimir mayor conductividad\n");
+		scanf("%d",&cuartaopcion);
+		do{
+		  if(cuartaopcion==1){
+		  
+		  float mayorPh= comparacionpH(Fuentes, contador+1);
+		   printf("El mayor pH es: %2.f\n", mayorPh);
+		   
+		   }else if(cuartaopcion==2){
+		   	
+		  float mayor_conductividad= comparacionConductividad(Fuentes, contador+1);
+		    printf("La mayor conductividad es: %d\n", mayor_conductividad);
+		   }
+	    }while(cuartaopcion<1 || cuartaopcion>2);
 	}
 
 
