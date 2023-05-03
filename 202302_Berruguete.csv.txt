@@ -11,11 +11,11 @@ Fuente_10 7.85 201 5 0
 Fuente_11 7.23 145 3 0
 Fuente_12 6.17 236 0 0
 Fuente_13 6.74 163 0 0
-Fuente_14 8    147 1 1
+Fuente_14 8.00 147 1 1
 Fuente_15 5.98 114 0 0
 Fuente_16 7.23 164 1 0
 Fuente_17 7.86 269 0 2
-Fuente_18 6.3  248 0 0
+Fuente_18 6.30  248 0 0
 Fuente_19 5.59 258 4 0
 Fuente_20 7.02 147 0 0
 Fuente_21 6.54 159 2 2

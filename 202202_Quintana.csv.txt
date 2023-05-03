@@ -1,4 +1,4 @@
-Fuente_1 6 100 2 0
+Fuente_1 6.00 100 2 0
 Fuente_2 7.19 158 0 0
 Fuente_3 6.59 234 1 1
 Fuente_4 7.75 239 0 1
