@@ -1,7 +1,12 @@
-#include <stdio.h>
+ #include <stdio.h>
 #include <stdlib.h>
 
 struct Tbarrios {
+	char nombre[50];
+	float ph;
+	int coliformes;
+	int conductividad;
+	int turbidez;
 	float ph[500];
 	int coliformes[500];
 	int conductividad[500];
@@ -12,62 +17,35 @@ float MediaPh(float[],int); //funcion que nos calcula la media del ph de todas l
 
 int main () {
 	
+	struct Tbarrios fuentes[500];
 	int i;
 	
+	int i=0;
+	// Abrir el fichero
 	FILE *dfe; // datos de las fuentes (fichero de entrada con el modo read) y datos de fuentes (fichero de salida con el modo write)
 	
 	dfe = fopen("202211_Coslada.csv.txt", "r");
-	
-	if (dfe == NULL) {
+@ -25,12 +22,6 @@ int main () {
 		printf("Error, no puede abrirse el fichero.\n");   
 		return 0;
 	} 
+	while (fscanf(dfe,"%s %f %d %d %d", fuentes[i].nombre,&fuentes[i].ph, &fuentes[i].coliformes, &fuentes[i].conductividad, &fuentes[i].turbidez) != EOF){
+		/*printf("%s %f %d %d %d\n", fuentes[i].nombre,&fuentes[i].ph, &fuentes[i].coliformes, &fuentes[i].conductividad, &fuentes[i].turbidez);*/
+		
+		i++;
+	}
+	fclose(dfe);
 
 	char opcion;
 	int opcion1,eleccion;
-	do {
-		printf("Seleccione el barrio del cual desee obtener informacion:\n");
-		printf("C.Coslada (20 fuentes)\n");
-		printf("Q.Quintana (15 fuentes)\n");
-		printf("E.Embajadores (26 fuentes)\n");
-		printf("S.San blas (10 fuentes)\n");
-		printf("B.Berruguete (21 fuentes)\n");
-		printf("P.Pacifico (18 fuentes)\n");
-		printf("V.Vallehermoso (16 fuentes)\n");
-		printf("T.Trafalgar (24 fuentes)\n");
-		printf("A.Atocha (14 fuentes)\n");
-		printf("L.Legazpi (22 fuentes)\n");  
-		scanf("%c", &opcion);
-		fflush(stdin);
-		
-		if((opcion=='C') || (opcion == 'Q') || (opcion == 'E') || (opcion == 'S') || (opcion == 'B') || (opcion == 'P') || (opcion == 'V') ||(opcion == 'T')|| (opcion == 'A')||(opcion == 'L')){
-			if(opcion =='C'){
-				
-				system("cls");
-				do {
-				printf("Has seleccionado Coslada\n");
-				printf("Seleccione una opcion:\n");
-				printf("1.Operaciones estadisticas (media,comparaciones...)\n");
-				printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
-				printf("3.Graficar funciones(seleccione parametro a graficar(pH,conductividad))\n");
-				printf("4.Salir del programa\n");
-				scanf("%d", &opcion1);
-				}while (opcion1<1 || opcion1>4);
-				
-				switch(opcion1) {
-					case 1:
-						system("cls");
-						printf("Que operacion estadistica deseas realizar:\n");
-						printf("1.Media del pH\n");
-						printf("2.Media de la conductividad\n");
-						printf("3.Comparacion del pH (orden de mayor a menor)\n");
-						printf("4.Comparacion de la conductividad (orden de mayor a menor)\n");
-						printf("5.Fuente con mayor turbidez\n");
+@ -75,9 +66,16 @@ int main () {
 						printf("6.Fuentes con la misma conductividad\n");
 						scanf("%d", &eleccion);
 						
 						
 						if(eleccion == 1) {
+							/*MediaPh(fuentes[i].ph , 20);*/
+							printf("%s %f %d %d %d\n", fuentes[i].nombre,&fuentes[i].ph, &fuentes[i].coliformes, &fuentes[i].conductividad, &fuentes[i].turbidez);
 							struct Tbarrios fuentes[500];
 							i = 0;
 							while (fscanf(dfe,"%f %d %d %d", &fuentes[i].ph, &fuentes[i].coliformes, &fuentes[i].conductividad, &fuentes[i].turbidez) != EOF){
@@ -79,16 +57,11 @@ int main () {
 							printf("La media del pH es: %f",MediaPh);
 							
 						}else if(eleccion ==2) {
-							
-						}else if(eleccion ==3) {
-							
-						}else if(eleccion ==4) {
-							
-						}else if(eleccion ==5) {
-							
+@ -91,133 +89,134 @@
 						}else if(eleccion ==6) {
 							
 						}
+					
 						
 						
 						break;
@@ -109,7 +82,7 @@ int main () {
 						break;
 					case 4:
 						system("cls");
-						printf("¡Hasta pronto!");
+						printf("?Hasta pronto!");
 						break;
 					default:
 					system("cls");	
@@ -218,4 +191,3 @@ float MediaPh(float v[], int dim)  {     // funcion generica tanto como si son 5
 	return (media/dim);
 
 }
-
