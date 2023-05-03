@@ -207,7 +207,7 @@ int main() {
 		   
 		   }else if(cuartaopcion==2){
 		   	
-		  float mayor_conductividad= comparacionConductividad(Fuentes, contador+1);
+		  float mayor_conductividad= comparacionConductividad(Fuentes, contador);
 		    printf("La mayor conductividad es: %d\n", mayor_conductividad);
 		   }
 	    }while(cuartaopcion<1 || cuartaopcion>2);
