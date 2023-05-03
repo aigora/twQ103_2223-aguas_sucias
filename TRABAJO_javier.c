@@ -11,6 +11,35 @@ typedef struct {
     int coliformes;
 } Barrio;
 
+float ComparacionPh(Barrio fuentes[], int num_fuentes){
+	int i;
+    float mayorPh = 0;
+     /*for(i=0;i<num_fuentes;i++){
+    	if(fuentes[i].ph>=fuentes[i+1].ph){
+		
+    	mayorPh=fuentes[i].ph;
+		}else if(fuentes[i].ph<=fuentes[i+1].ph){
+        mayorPh=fuentes[i+1].ph;
+		}
+		return mayorPh;
+	
+	}*/
+    if (fuentes[0].ph>fuentes[1].ph){
+    	mayorPh=fuentes[0].ph;
+	}else{
+		mayorPh=fuentes[1].ph;
+	};
+
+    for(i=2;i<num_fuentes;i++){
+    	if(fuentes[i].ph>=mayorPh){
+		
+    	mayorPh=fuentes[i].ph;
+		}
+	
+		
+		return mayorPh;//PREGUNTAR QUE TA MAL
+	}
+}
 void funcionmenu(){
 	
     char palabra[] ="    ***           ***  *********  *******    **   ********  ";
@@ -132,14 +161,14 @@ int main() {
     do{
 	
    printf("Seleccione una opcion:\n");
-	printf("1.Operaciones estadisticas (media,comparaciones...)\n");
+	printf("1.Operaciones estadisticas (medias)\n");
 	printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
-	printf("3.Graficar funciones(seleccione parametro a graficar(pH,conductividad))\n");
+	printf("3.Comparaciones\n");
 	printf("4.Salir del programa\n");
 	scanf("%d",& opcion);
 	}while(opcion<1 || opcion>4);
 		system("cls");
-	if(opcion==1){
+	   if(opcion==1){
 		do{
 		
 		printf("Seleccione una de las siguientes operaciones estadisticas:\n");
@@ -156,12 +185,17 @@ int main() {
 			float sumatorioconductividad = calcular_sumatorio_conductividad(Fuentes, contador+1);
             printf("La conductividad media es: %f", sumatorioconductividad/contador);
 		}
+	}else if(opcion == 2) {
+		
+	}else if(opcion==3) {
+		  float mayorPh= ComparacionPh(Fuentes, contador+1);
+		printf("El mayor pH es: %f\n", mayorPh);
 	}
-
 
 
     return 0;
 }
+
 
 
 
