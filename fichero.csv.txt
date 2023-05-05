@@ -1,3 +1,5 @@
-fuente1 1 2 3 4
-fuente2 5 6 7 8 
-fuente3 15 9 10 11
+fuente1 7 140 3 1  
+fuente2 10 140 3 1
+fuente3 7 210 3 1
+fuente4 7 140 6 1
+fuente5 7 140 3 3

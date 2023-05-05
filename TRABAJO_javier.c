@@ -25,7 +25,7 @@ void aguacaliente(Barrio fuentes[], int num_fuentes) {
 void aguapotable(Barrio fuentes[], int num_fuentes) {
 	int i;
 	for(i=0;i<num_fuentes;i++) {
-		if((6.5>fuentes[i].ph >9.5)||(fuentes[i].conductividad >200)||(fuentes[i].turbidez>5)||(fuentes[i].coliformes >2)) {
+		if((6.5>fuentes[i].ph) || (fuentes[i].ph>9.5)||(fuentes[i].conductividad >200)||(fuentes[i].turbidez>5)||(fuentes[i].coliformes >2)) {
 			printf("El agua de la %s NO es potable\n",fuentes[i].nombre);
 		}
 		else {
@@ -233,7 +233,7 @@ int main() {
 		  aguacaliente(Fuentes,contador);
 	
 		}else if (terceraopcion==2){
-			aguapotable(Fuentes,contador);
+			aguapotable(Fuentes,contador+1);
 		}
 		
 	} else if(opcion==3) {
