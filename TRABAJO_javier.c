@@ -168,14 +168,13 @@ int lectorficheros() {
     
     funciondetectorph(Fuentes, contador+1);
 
-return 1;
+    return 5;
 }
 
 
 int main(){
 	funcionmenu();
 	do{
-	
 	lectorficheros();
 	}while (lectorficheros()==0);
 	int i = 0, opcion, segundaopcion, cuartaopcion, contador=-1;
