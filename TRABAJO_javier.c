@@ -33,7 +33,17 @@ int comparacionConductividad(Barrio fuentes[], int num_fuentes) {
     return max_conductividad;
 }
 
-
+int funciondetectorph(Barrio fuentes[], int num_fuentes) {
+	int i;
+	for(i=0;i< num_fuentes; i++){
+	
+		if(	fuentes[i].ph >14||	fuentes[i].ph<0){
+		
+		printf("Algunos de los datos del ph son erroneos por ser mayores de 14 o negativos\n");
+		break;
+		}
+	}
+}
 
 
 
@@ -155,6 +165,9 @@ int main() {
     for ( j = 0; j < contador; j++) {
         printf("%s tiene un ph de %.2f una conductividad de: %d turbidez de: %d y coliformes: %d\n", Fuentes[j].nombre, Fuentes[j].ph, Fuentes[j].conductividad, Fuentes[j].turbidez, Fuentes[j].coliformes);
     }
+    
+    funciondetectorph(Fuentes, contador+1);
+    
     do{
 	
    printf("Seleccione una opcion:\n");
