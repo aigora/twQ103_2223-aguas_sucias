@@ -130,12 +130,12 @@ float calcular_sumatorio_conductividad(Barrio fuentes[], int num_fuentes) {
     }
     return sumatorioconductividad;
 }
-int lectorficheros() {
+int main() {
     Barrio Fuentes[MAX_FUENTES];
     int i = 0,contador=-1, opcion, segundaopcion, cuartaopcion;
     char nombrefichero[100];
 
-    
+    funcionmenu();
      printf("Ingrese el nombre del archivo con los datos de las fuentes: ");
     scanf("%s", nombrefichero);
 
@@ -167,19 +167,7 @@ int lectorficheros() {
     }
     
     funciondetectorph(Fuentes, contador+1);
-
-    return 5;
-}
-
-
-int main(){
-	funcionmenu();
-	do{
-	lectorficheros();
-	}while (lectorficheros()!=5);
-	int i = 0, opcion, segundaopcion, cuartaopcion, contador=-1;
-	Barrio Fuentes[MAX_FUENTES];
-	do{
+    do{
 	
    printf("Seleccione una opcion:\n");
 	printf("1.Operaciones estadisticas (medias)\n");
@@ -228,10 +216,9 @@ int main(){
 		}
 	    
 	}
+
+    return 0;
 }
-
-
-
 
 
 
