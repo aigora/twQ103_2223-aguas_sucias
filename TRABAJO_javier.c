@@ -176,7 +176,7 @@ int main(){
 	funcionmenu();
 	do{
 	lectorficheros();
-	}while (lectorficheros()==0);
+	}while (lectorficheros()!=5);
 	int i = 0, opcion, segundaopcion, cuartaopcion, contador=-1;
 	Barrio Fuentes[MAX_FUENTES];
 	do{
