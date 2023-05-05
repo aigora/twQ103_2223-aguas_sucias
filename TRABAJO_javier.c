@@ -11,6 +11,29 @@ typedef struct {
     int coliformes;
 } Barrio;
 
+void aguacaliente(Barrio fuentes[], int num_fuentes) {
+	int i;
+	for (i = 0; i < num_fuentes; i++) {
+        if (fuentes[i].turbidez > 5 ) {
+           printf("El agua de la %s esta caliente\n",fuentes[i].nombre);
+        }
+        else {
+        	printf("El agua de la %s esta fria\n",fuentes[i].nombre);
+		}
+    }
+}
+void aguapotable(Barrio fuentes[], int num_fuentes) {
+	int i;
+	for(i=0;i<num_fuentes;i++) {
+		if((6.5>fuentes[i].ph >9.5)||(fuentes[i].conductividad >200)||(fuentes[i].turbidez>5)||(fuentes[i].coliformes >2)) {
+			printf("El agua de la %s NO es potable\n",fuentes[i].nombre);
+		}
+		else {
+			printf("El agua de la %s  es potable\n",fuentes[i].nombre);
+		}
+	}
+	
+}
 float comparacionpH(Barrio fuentes[], int num_fuentes) {
     float max_ph = 0.0;
     int i;
@@ -132,7 +155,8 @@ float calcular_sumatorio_conductividad(Barrio fuentes[], int num_fuentes) {
 }
 int main() {
     Barrio Fuentes[MAX_FUENTES];
-    int i = 0,contador=-1, opcion, segundaopcion, cuartaopcion;
+    int i = 0,contador=-1;
+	int  opcion, segundaopcion, cuartaopcion,terceraopcion;
     char nombrefichero[100];
 
     funcionmenu();
@@ -186,7 +210,9 @@ int main() {
 	    printf("3.Salir del programa\n");
 	    scanf("%d",& segundaopcion);
 		}while(segundaopcion<1 || segundaopcion>3);
+		
 		system("cls");
+		
 		if(segundaopcion==1){
 			float sumatorioph = calcular_sumatorio_ph(Fuentes, contador+1);
 			printf("La media del pH de todas las fuentes es: %f", sumatorioph/contador);
@@ -194,9 +220,23 @@ int main() {
 			float sumatorioconductividad = calcular_sumatorio_conductividad(Fuentes, contador+1);
             printf("La conductividad media es: %f", sumatorioconductividad/contador);
 		}
-	}else if(opcion == 2) {
+	} else if(opcion == 2) {
+		do {
 		
-	}else if(opcion==3) {
+		printf("Selecciona una opcion:\n");
+		printf("1.Informacion sobre la temperatura del agua\n");
+		printf("2.Informacion sobre la potabilidad del agua\n");
+		scanf("%d",&terceraopcion);
+		}while(terceraopcion<1 || terceraopcion>2);
+		
+		if(terceraopcion==1){
+		  aguacaliente(Fuentes,contador);
+	
+		}else if (terceraopcion==2){
+			aguapotable(Fuentes,contador);
+		}
+		
+	} else if(opcion==3) {
 		do{
 		printf("Selecciona una opcion:\n");
 		printf("1.Imprimir mayor pH\n");
