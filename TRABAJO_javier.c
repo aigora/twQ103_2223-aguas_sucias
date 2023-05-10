@@ -3,7 +3,7 @@
 #define MAX_FUENTES 100
 #include <string.h>
 #include <windows.h>
-typedef struct {
+typedef struct { 
     char nombre[50];
     float ph;
     int conductividad;
@@ -44,7 +44,6 @@ float comparacionpH(Barrio fuentes[], int num_fuentes) {
     }
     return max_ph;
 }
-
 int comparacionConductividad(Barrio fuentes[], int num_fuentes) {
     int max_conductividad = 0;
     int i;
@@ -55,7 +54,6 @@ int comparacionConductividad(Barrio fuentes[], int num_fuentes) {
     }
     return max_conductividad;
 }
-
 int funciondetectorph(Barrio fuentes[], int num_fuentes) {
 	int i;
 	for(i=0;i< num_fuentes; i++){
@@ -67,9 +65,22 @@ int funciondetectorph(Barrio fuentes[], int num_fuentes) {
 		}
 	}
 }
-
-
-
+float calcular_sumatorio_ph(Barrio fuentes[], int num_fuentes) {
+    float sumatorioph = 0;
+    int i;
+    for (i = 0; i < num_fuentes; i++) {
+        sumatorioph += fuentes[i].ph;
+    }
+    return sumatorioph;
+}
+float calcular_sumatorio_conductividad(Barrio fuentes[], int num_fuentes) {
+    float sumatorioconductividad = 0;
+    int i;
+    for (i = 0; i < num_fuentes; i++) {
+        sumatorioconductividad += fuentes[i].conductividad;
+    }
+    return sumatorioconductividad;
+}
 void funcionmenu(){
 	
     char palabra[] ="    ***           ***  *********  *******    **   ********  ";
@@ -136,23 +147,6 @@ void funcionmenu(){
  
 }
 
-float calcular_sumatorio_ph(Barrio fuentes[], int num_fuentes) {
-    float sumatorioph = 0;
-    int i;
-    for (i = 0; i < num_fuentes; i++) {
-        sumatorioph += fuentes[i].ph;
-    }
-    return sumatorioph;
-}
-
-float calcular_sumatorio_conductividad(Barrio fuentes[], int num_fuentes) {
-    float sumatorioconductividad = 0;
-    int i;
-    for (i = 0; i < num_fuentes; i++) {
-        sumatorioconductividad += fuentes[i].conductividad;
-    }
-    return sumatorioconductividad;
-}
 int main() {
     Barrio Fuentes[MAX_FUENTES];
     int i = 0,contador=-1;
@@ -172,8 +166,6 @@ int main() {
 		return 0;
 	} 
 	
-
-
     // Leer el archivo línea por línea
     while (!feof(ficherofuentes) && i < MAX_FUENTES) {
         fscanf(ficherofuentes, "%s %f %d %d %d", Fuentes[i].nombre, &Fuentes[i].ph, &Fuentes[i].conductividad,&Fuentes[i].turbidez,&Fuentes[i].coliformes);
