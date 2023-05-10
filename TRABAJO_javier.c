@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 #include <stdlib.h>
 #define MAX_FUENTES 100
 #include <string.h>
@@ -10,6 +11,8 @@ typedef struct {
     int turbidez;
     int coliformes;
 } Barrio;
+
+
 
 void aguacaliente(Barrio fuentes[], int num_fuentes) {
 	int i;
@@ -47,9 +50,11 @@ float comparacionpH(Barrio fuentes[], int num_fuentes) {
 int comparacionConductividad(Barrio fuentes[], int num_fuentes) {
     int max_conductividad = 0;
     int i;
+     printf("%d\n", num_fuentes);
     for (i = 0; i < num_fuentes; i++) {
         if (fuentes[i].conductividad > max_conductividad) {
             max_conductividad = fuentes[i].conductividad;
+            printf("%d\n", max_conductividad);
         }
     }
     return max_conductividad;
@@ -73,6 +78,21 @@ float calcular_sumatorio_ph(Barrio fuentes[], int num_fuentes) {
     }
     return sumatorioph;
 }
+
+float calcular_desviaciontipica_ph(Barrio fuentes[], int num_fuentes){
+	 float sumatorioph = 0;
+    int i;
+    for (i = 0; i < num_fuentes; i++) {
+        sumatorioph += fuentes[i].ph;
+    }
+	float sumaCuadrados = 0;
+
+    for (i = 0; i < num_fuentes; i++) {
+        sumaCuadrados += pow(fuentes[i].ph -(sumatorioph/num_fuentes), 2);
+    }
+    return sqrt(sumaCuadrados / num_fuentes);
+}
+ 
 float calcular_sumatorio_conductividad(Barrio fuentes[], int num_fuentes) {
     float sumatorioconductividad = 0;
     int i;
@@ -153,6 +173,7 @@ int main() {
 	int  opcion, segundaopcion, cuartaopcion,terceraopcion;
     char nombrefichero[100];
 
+	
     funcionmenu();
      printf("Ingrese el nombre del archivo con los datos de las fuentes: ");
     scanf("%s", nombrefichero);
@@ -178,7 +199,7 @@ int main() {
 
     // Imprimir los datos
     int j;
-    for ( j = 0; j < contador; j++) {
+    for ( j = 0; j<contador; j++) {
         printf("%s tiene un ph de %.2f una conductividad de: %d turbidez de: %d y coliformes: %d\n", Fuentes[j].nombre, Fuentes[j].ph, Fuentes[j].conductividad, Fuentes[j].turbidez, Fuentes[j].coliformes);
     }
     
@@ -186,7 +207,7 @@ int main() {
     do{
 	
    printf("Seleccione una opcion:\n");
-	printf("1.Operaciones estadisticas (medias)\n");
+	printf("1.Operaciones estadisticas (medias,desviacion tipica)\n");
 	printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
 	printf("3.Comparaciones\n");
 	printf("4.Salir del programa\n");
@@ -199,19 +220,31 @@ int main() {
 		printf("Seleccione una de las siguientes operaciones estadisticas:\n");
 	    printf("1. Media de los niveles de pH de las fuentes\n");
 	    printf("2.Media de los niveles de conductividad de las fuentes\n");
-	    printf("3.Salir del programa\n");
+	    printf("3.Desviacion tipica del pH con los datos de las fuentes\n");
+	    printf("4. Desviacion tipica de la conductividad con los datos de las fuentes\n");
+	    printf("5.Salir del programa\n");
 	    scanf("%d",& segundaopcion);
-		}while(segundaopcion<1 || segundaopcion>3);
+		}while(segundaopcion<1 || segundaopcion>5);
 		
 		system("cls");
-		
+
 		if(segundaopcion==1){
 			float sumatorioph = calcular_sumatorio_ph(Fuentes, contador+1);
 			printf("La media del pH de todas las fuentes es: %f", sumatorioph/contador);
 		}else if(segundaopcion==2){
 			float sumatorioconductividad = calcular_sumatorio_conductividad(Fuentes, contador+1);
             printf("La conductividad media es: %f", sumatorioconductividad/contador);
+		}else if(segundaopcion==3) {
+	
+		 printf("la desv es %f",calcular_desviaciontipica_ph(Fuentes, contador+1));
+			
+		}else if(segundaopcion==4) {
+			
+		}else if(segundaopcion==5) {
+			
 		}
+		
+		
 	} else if(opcion == 2) {
 		do {
 		
@@ -238,13 +271,13 @@ int main() {
 		
 		if(cuartaopcion==1){
 		  
-		float mayorPh= comparacionpH(Fuentes, contador+1);
-		printf("El mayor pH es: %f\n", mayorPh);
+			float mayorPh= comparacionpH(Fuentes, contador+1);
+			printf("El mayor pH es: %.2f\n", mayorPh);
 		   
 		}else if(cuartaopcion==2){
 		   	
-		int mayorconductividad= comparacionConductividad(Fuentes, contador+1);
-		printf("La mayor conductividad es: %d\n", mayorconductividad);
+			int mayorconductividad= comparacionConductividad(Fuentes, contador);
+			printf("La mayor conductividad es: %d\n", mayorconductividad);
 		}
 	    
 	}
