@@ -50,11 +50,9 @@ float comparacionpH(Barrio fuentes[], int num_fuentes) {
 int comparacionConductividad(Barrio fuentes[], int num_fuentes) {
     int max_conductividad = 0;
     int i;
-     printf("%d\n", num_fuentes);
     for (i = 0; i < num_fuentes; i++) {
         if (fuentes[i].conductividad > max_conductividad) {
             max_conductividad = fuentes[i].conductividad;
-            printf("%d\n", max_conductividad);
         }
     }
     return max_conductividad;
@@ -79,6 +77,16 @@ float calcular_sumatorio_ph(Barrio fuentes[], int num_fuentes) {
     return sumatorioph;
 }
 
+ 
+float calcular_sumatorio_conductividad(Barrio fuentes[], int num_fuentes) {
+    float sumatorioconductividad = 0;
+    int i;
+    for (i = 0; i < num_fuentes; i++) {
+        sumatorioconductividad += fuentes[i].conductividad;
+    }
+    return sumatorioconductividad;
+}
+
 float calcular_desviaciontipica_ph(Barrio fuentes[], int num_fuentes){
 	 float sumatorioph = 0;
     int i;
@@ -91,15 +99,6 @@ float calcular_desviaciontipica_ph(Barrio fuentes[], int num_fuentes){
         sumaCuadrados += pow(fuentes[i].ph -(sumatorioph/num_fuentes), 2);
     }
     return sqrt(sumaCuadrados / num_fuentes);
-}
- 
-float calcular_sumatorio_conductividad(Barrio fuentes[], int num_fuentes) {
-    float sumatorioconductividad = 0;
-    int i;
-    for (i = 0; i < num_fuentes; i++) {
-        sumatorioconductividad += fuentes[i].conductividad;
-    }
-    return sumatorioconductividad;
 }
 void funcionmenu(){
 	
@@ -169,12 +168,11 @@ void funcionmenu(){
 
 int main() {
     Barrio Fuentes[MAX_FUENTES];
-    int i = 0,contador=-1;
 	int  opcion, segundaopcion, cuartaopcion,terceraopcion;
     char nombrefichero[100];
 
 	
-    funcionmenu();
+    //funcionmenu();
      printf("Ingrese el nombre del archivo con los datos de las fuentes: ");
     scanf("%s", nombrefichero);
 
@@ -186,22 +184,27 @@ int main() {
 		printf("Error, no puede abrirse el fichero.\n");   
 		return 0;
 	} 
-	
-    // Leer el archivo línea por línea
-    while (!feof(ficherofuentes) && i < MAX_FUENTES) {
-        fscanf(ficherofuentes, "%s %f %d %d %d", Fuentes[i].nombre, &Fuentes[i].ph, &Fuentes[i].conductividad,&Fuentes[i].turbidez,&Fuentes[i].coliformes);
-        i++;
-        contador++;
-    }
+	char campo1[20], campo2[20], campo3[20], campo4[20], campo5[20];
+    fscanf(ficherofuentes, "%s %s %s %s %s", campo1, campo2, campo3, campo4, campo5);
 
+    // Leer el archivo línea por línea
+    int i = 0;
+    int contador = -1;
+    while (!feof(ficherofuentes) && i < MAX_FUENTES) {
+      fscanf(ficherofuentes, "%s %f %d %d %d", Fuentes[i].nombre, &Fuentes[i].ph, &Fuentes[i].conductividad, &Fuentes[i].turbidez, &Fuentes[i].coliformes);
+       i++;
+    contador++;
+    }
     // Cerrar el archivo
     fclose(ficherofuentes);
 
     // Imprimir los datos
     int j;
-    for ( j = 0; j<contador; j++) {
-        printf("%s tiene un ph de %.2f una conductividad de: %d turbidez de: %d y coliformes: %d\n", Fuentes[j].nombre, Fuentes[j].ph, Fuentes[j].conductividad, Fuentes[j].turbidez, Fuentes[j].coliformes);
-    }
+for (j = 0; j < contador; j++) {
+        printf("%s tiene un %s de %.2f, una %s de %d, una %s de %d y %s de %d\n",
+           Fuentes[j].nombre, campo2, Fuentes[j].ph, campo3, Fuentes[j].conductividad,
+           campo4, Fuentes[j].turbidez, campo5, Fuentes[j].coliformes);
+    }   
     
     funciondetectorph(Fuentes, contador+1);
     do{
@@ -229,11 +232,11 @@ int main() {
 		system("cls");
 
 		if(segundaopcion==1){
-			float sumatorioph = calcular_sumatorio_ph(Fuentes, contador+1);
-			printf("La media del pH de todas las fuentes es: %f", sumatorioph/contador);
+			float sumatorioph = calcular_sumatorio_ph(Fuentes, contador);
+			printf("La media del pH de todas las fuentes es: %.2f", sumatorioph/contador);
 		}else if(segundaopcion==2){
-			float sumatorioconductividad = calcular_sumatorio_conductividad(Fuentes, contador+1);
-            printf("La conductividad media es: %f", sumatorioconductividad/contador);
+			float sumatorioconductividad = calcular_sumatorio_conductividad(Fuentes, contador);
+            printf("La conductividad media es: %.2f", sumatorioconductividad/contador);
 		}else if(segundaopcion==3) {
 	
 		 printf("la desv es %f",calcular_desviaciontipica_ph(Fuentes, contador+1));
@@ -271,7 +274,7 @@ int main() {
 		
 		if(cuartaopcion==1){
 		  
-			float mayorPh= comparacionpH(Fuentes, contador+1);
+			float mayorPh= comparacionpH(Fuentes, contador);
 			printf("El mayor pH es: %.2f\n", mayorPh);
 		   
 		}else if(cuartaopcion==2){
@@ -285,10 +288,6 @@ int main() {
     return 0;
 }
 
-
-
-
-	
 
 
 
