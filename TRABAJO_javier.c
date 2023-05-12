@@ -232,7 +232,7 @@ int main() {
        i++;
     contador++;
     }
-    printf("%d\n", contador);
+    printf("Hay un total de %d fuentes\n", contador);
     // Cerrar el archivo
     fclose(ficherofuentes);
 
@@ -256,7 +256,7 @@ for (j = 0; j < contador; j++) {
 	printf("4.Graficos de asteriscos\n");
 	printf("5.Salir del programa\n");
 	scanf("%d",& opcion);
-	}while(opcion<1 || opcion>4);
+	}while(opcion<1 || opcion>5);
 		system("cls");
 	   if(opcion==1){
 		do{
@@ -303,7 +303,7 @@ for (j = 0; j < contador; j++) {
 		  aguacaliente(Fuentes,contador);
 	
 		}else if (terceraopcion==2){
-			aguapotable(Fuentes,contador+1);
+			aguapotable(Fuentes,contador);
 		}
 		
 	} else if(opcion==3) {
@@ -345,15 +345,15 @@ for (j = 0; j < contador; j++) {
 			printf("\n");
 		}else if(quintaopcion==4){
 			graficocoliformes(Fuentes,contador);
-			printf("\n");	
+			printf("\n");
+	    }	
 	}else if(opcion==5){
-		printf("Saliendo del programa...Hasta pronto...");
-		 break;
+	 printf("Saliendo del programa...Hasta pronto...");
+		break;
 	}
 	
 }
-
-}
+ 
 
    return 0;
 }
