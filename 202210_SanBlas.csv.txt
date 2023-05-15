@@ -1,3 +1,4 @@
+nombre pH conductividad turbidez coliformes
 Fuente_1 6.75 241 0 1
 Fuente_2 7.20 108 3 0
 Fuente_3 7.96 114 5 2
