@@ -4,6 +4,8 @@
 #define MAX_FUENTES 100
 #include <string.h>
 #include <windows.h>
+
+// Definimos la funcion estructura llamada barrio que recoge los datos de las fuentes (ph,conductividad...)
 typedef struct { 
     char nombre[50];
     float ph;
@@ -11,7 +13,8 @@ typedef struct {
     int turbidez;
     int coliformes;
 } Barrio;
-
+// Comienzo de definicion de funciones
+// Usamos esta funcion para crear un grafico con asteriscos del ph (si el ph es 7.6 lo redondearia a 8 y entonces imprimiria por pantalla 8 asteriscos, mientras que si es un numero entero lo dejaria tal cual)
 void graficoph(Barrio fuentes[], int num_fuentes) {
 	int i,j, valorph;
 	for(i=0; i<num_fuentes;i++){
@@ -22,7 +25,7 @@ void graficoph(Barrio fuentes[], int num_fuentes) {
 		}
 	}
 }
-
+// Usamos esta funcion para crear un grafico con asteriscos de la conductividad
 void graficoconductividad(Barrio fuentes[], int num_fuentes) {
 	int i,j,valorconductividad;
 	for(i=0; i<num_fuentes;i++){
@@ -33,6 +36,7 @@ void graficoconductividad(Barrio fuentes[], int num_fuentes) {
 		}
 	}
 }
+// Usamos esta funcion para crear un grafico con asteriscos de la turbidez
 void graficoturbidez(Barrio fuentes[], int num_fuentes) {
 	int i,j;
 	for(i=0; i<num_fuentes;i++){
@@ -42,7 +46,7 @@ void graficoturbidez(Barrio fuentes[], int num_fuentes) {
 		}
 	}
 }
-
+// Usamos esta funcion para crear un grafico con asteriscos de los coliformes
 void graficocoliformes(Barrio fuentes[], int num_fuentes) {
 	int i,j;
 	for(i=0; i<num_fuentes;i++){
@@ -52,6 +56,8 @@ void graficocoliformes(Barrio fuentes[], int num_fuentes) {
 		}
 	}
 }
+
+// Usamos esta funcion para saber si el agua esta caliente o fria dependiendo de si la turbidez es > o < 5
 void aguacaliente(Barrio fuentes[], int num_fuentes) {
 	int i;
 	for (i = 0; i < num_fuentes; i++){
@@ -63,7 +69,7 @@ void aguacaliente(Barrio fuentes[], int num_fuentes) {
 		}
 	}
 }
-
+// Usamos esta funcion para saber si el agua es o no potable
 void aguapotable(Barrio fuentes[], int num_fuentes) {
 	int i;
 	for(i=0;i<num_fuentes;i++) {
@@ -73,8 +79,8 @@ void aguapotable(Barrio fuentes[], int num_fuentes) {
 		  printf("El agua de la %s  es potable\n",fuentes[i].nombre);
 		}
 	}
-	
 }
+// Usamos esta funcion para saber cual es el mayor ph de entre todas las fuentes
 float comparacionpH(Barrio fuentes[], int num_fuentes) {
     float max_ph = 0.0;
     int i;
@@ -85,6 +91,7 @@ float comparacionpH(Barrio fuentes[], int num_fuentes) {
     }
     return max_ph;
 }
+//Usamos esta funcion para saber cual es el mayor valor de la conductividad de entre todas las fuentes
 int comparacionConductividad(Barrio fuentes[], int num_fuentes) {
     int max_conductividad = 0;
     int i;
@@ -95,6 +102,7 @@ int comparacionConductividad(Barrio fuentes[], int num_fuentes) {
     }
     return max_conductividad;
 }
+// Usamos esta funcion para saber si el ph de alguna fuente es erroneo o no (es decir ,no esta entre el rango 0-14) 
 int funciondetectorph(Barrio fuentes[], int num_fuentes) {
 	int i;
 	for(i=0;i< num_fuentes; i++){
@@ -106,6 +114,7 @@ int funciondetectorph(Barrio fuentes[], int num_fuentes) {
 		}
 	}
 }
+// Usamos esta funcion para calcular el sumatorio de todos los ph de las fuentes y luego poder calcular la media y la desviacion total del ph
 float calcular_sumatorio_ph(Barrio fuentes[], int num_fuentes) {
     float sumatorioph = 0;
     int i;
@@ -114,8 +123,7 @@ float calcular_sumatorio_ph(Barrio fuentes[], int num_fuentes) {
     }
     return sumatorioph;
 }
-
- 
+// Usamos esta funcion para calcular el sumatorio de la conductividad de las fuentes y luego poder calcular la media total y la desviacion de la conductividad
 float calcular_sumatorio_conductividad(Barrio fuentes[], int num_fuentes) {
     float sumatorioconductividad = 0;
     int i;
@@ -124,7 +132,7 @@ float calcular_sumatorio_conductividad(Barrio fuentes[], int num_fuentes) {
     }
     return sumatorioconductividad;
 }
-
+// Usamos esta funcion para calcular el sumatorio de la turbidez de todas las fuentes y luego poder calcular la media total  y la desviacion de la turbidez
 float calcular_sumatorio_turbidez(Barrio fuentes[], int num_fuentes) {
     float sumatorioturbidez = 0;
     int i;
@@ -133,6 +141,8 @@ float calcular_sumatorio_turbidez(Barrio fuentes[], int num_fuentes) {
     }
     return sumatorioturbidez;
 }
+// Usamos esta funcion para calcular el sumatorio de la turbidez de todas las fuentes y luego poder calcular la media total  y la desviacion de la turbidez
+
 float calcular_sumatorio_coliformes(Barrio fuentes[], int num_fuentes) {
     float sumatoriocoliformes = 0;
     int i;
@@ -141,7 +151,7 @@ float calcular_sumatorio_coliformes(Barrio fuentes[], int num_fuentes) {
     }
     return sumatoriocoliformes;
 }
-
+// Usamos esta funcion para calcular la desviacion tipica  del ph
 float calcular_desviaciontipica_ph(Barrio fuentes[], int num_fuentes){
     int i;
     float sumatorio_de_cuadrados=0.0,sumatoriodividido=0,Media_ph;
@@ -154,6 +164,7 @@ float calcular_desviaciontipica_ph(Barrio fuentes[], int num_fuentes){
 	sumatoriodividido=sumatorio_de_cuadrados/num_fuentes;
     return sqrt(sumatoriodividido);
 }
+// Usamos esta funcion para calcular la desviacion tipica de la conductividad
 float calcular_desviaciontipica_Conductividad(Barrio fuentes[], int num_fuentes){
     int i;
     float sumatorio_de_cuadrados=0.0,sumatoriodividido=0,Media_conductividad;
@@ -166,6 +177,7 @@ float calcular_desviaciontipica_Conductividad(Barrio fuentes[], int num_fuentes)
 	sumatoriodividido=sumatorio_de_cuadrados/num_fuentes;
     return sqrt(sumatoriodividido);
 }
+// Usamos esta funcion para calcular la desviacion tipica de la turbidez
 float calcular_desviaciontipica_turbidez(Barrio fuentes[], int num_fuentes){
     int i;
     float sumatorio_de_cuadrados=0.0,sumatoriodividido=0,Media_turbidez;
@@ -178,6 +190,7 @@ float calcular_desviaciontipica_turbidez(Barrio fuentes[], int num_fuentes){
 	sumatoriodividido=sumatorio_de_cuadrados/num_fuentes;
     return sqrt(sumatoriodividido);
 }
+// Usamos esta funcion para calcular la desviacion tipica de los coliformes
 float calcular_desviaciontipica_coliformes(Barrio fuentes[], int num_fuentes){
     int i;
     float sumatorio_de_cuadrados=0.0,sumatoriodividido=0,Media_coliformes;
@@ -190,6 +203,7 @@ float calcular_desviaciontipica_coliformes(Barrio fuentes[], int num_fuentes){
 	sumatoriodividido=sumatorio_de_cuadrados/num_fuentes;
     return sqrt(sumatoriodividido);
 }
+// Esta funcion nos presenta por pantalla el inicio del programa con el titulo (MEDIO AMBIENTE)
 void funcionmenu(){
 	
     char palabra[] ="    ***           ***  *********  *******    **   ********  ";
@@ -255,28 +269,33 @@ void funcionmenu(){
 
  
 }
+// Inicio del programa
 
 int main() {
+	
+	//Declaracion de variables
+	
     Barrio Fuentes[MAX_FUENTES];
 	int  opcion, segundaopcion, cuartaopcion,terceraopcion, quintaopcion;
     char nombrefichero[100];
 
-	
     funcionmenu();
      printf("Ingrese el nombre del archivo con los datos de las fuentes: ");
     scanf("%s", nombrefichero);
 
-    // Abrir el archivo para lectura
+    // Abrir el fichero (modo lectura)
+    
     FILE* ficherofuentes;
 	ficherofuentes = fopen(nombrefichero, "r");
-    
+    //Si no se encuentra el fichero, el programa emite un mensaje dando un aviso
     if (ficherofuentes == NULL) {
 		printf("Error, no puede abrirse el fichero.\n");   
 		return 0;
 	} 
+	
+	// Lee la primera linea del fichero con los datos de las fuentes
 	char nombre1[20], nombre2[20], nombre3[20], nombre4[20], nombre5[20];
     fscanf(ficherofuentes, "%s %s %s %s %s", nombre1, nombre2, nombre3, nombre4, nombre5);
-
     // Leer el archivo línea por línea
     int i = 0;
     int contador = 0;
@@ -285,11 +304,12 @@ int main() {
        i++;
     contador++;
     }
+    
     printf("Hay un total de %d fuentes\n", contador);
     // Cerrar el archivo
     fclose(ficherofuentes);
 
-    // Imprimir los datos
+    // Imprimir los datos por pantalla
     int j;
 for (j = 0; j < contador; j++) {
         printf("%s tiene un %s de %.2f, una %s de %d, una %s de %d y %s de %d\n",
@@ -298,8 +318,11 @@ for (j = 0; j < contador; j++) {
     }   
     
     funciondetectorph(Fuentes, contador+1);
+    // Bucle infinito para pedir varios datos al usuario hasta que desee salir del programa pulsando 5
     while (1){
     	Sleep(1000);
+    	
+	// Menu de opciones
 	
     do{
    printf("Seleccione una opcion:\n\n");
@@ -313,7 +336,6 @@ for (j = 0; j < contador; j++) {
 		system("cls");
 	   if(opcion==1){
 		do{
-		
 		printf("Seleccione una de las siguientes operaciones estadisticas:\n\n");
 	    printf("1. Media de los niveles de pH de las fuentes\n\n");
 	    printf("2.Media de los niveles de conductividad de las fuentes\n\n");
@@ -325,7 +347,7 @@ for (j = 0; j < contador; j++) {
 	    printf("8. Desviacion tipica y varianza de los coliformes con los datos de las fuentes\n\n");
 	    printf("9.Salir del programa\n\n");
 	    scanf("%d",& segundaopcion);
-		}while(segundaopcion<1 || segundaopcion>9);
+		} while(segundaopcion<1 || segundaopcion>9);
 		
 		system("cls");
 
@@ -370,6 +392,7 @@ for (j = 0; j < contador; j++) {
 		}else if(segundaopcion==9) {
 			
 		 printf("Saliendo del programa...Hasta pronto...");
+		 // Al poner un break lo que hacemos es salir del programa
 		 break;
 		}		
 	} else if(opcion == 2) {
@@ -431,6 +454,7 @@ for (j = 0; j < contador; j++) {
 	    }	
 	}else if(opcion==5){
 	 printf("Saliendo del programa...Hasta pronto...");
+	  // Al poner un break lo que hacemos es salir del programa
 		break;
 	}
 	
