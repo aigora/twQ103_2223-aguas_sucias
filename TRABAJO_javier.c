@@ -125,15 +125,68 @@ float calcular_sumatorio_conductividad(Barrio fuentes[], int num_fuentes) {
     return sumatorioconductividad;
 }
 
+float calcular_sumatorio_turbidez(Barrio fuentes[], int num_fuentes) {
+    float sumatorioturbidez = 0;
+    int i;
+    for (i = 0; i < num_fuentes; i++) {
+        sumatorioturbidez += fuentes[i].turbidez;
+    }
+    return sumatorioturbidez;
+}
+float calcular_sumatorio_coliformes(Barrio fuentes[], int num_fuentes) {
+    float sumatoriocoliformes = 0;
+    int i;
+    for (i = 0; i < num_fuentes; i++) {
+        sumatoriocoliformes += fuentes[i].coliformes;
+    }
+    return sumatoriocoliformes;
+}
+
 float calcular_desviaciontipica_ph(Barrio fuentes[], int num_fuentes){
     int i;
-    float sumatorio_de_cuadrados=0.0,sumatoriodividido,Media_ph;
+    float sumatorio_de_cuadrados=0.0,sumatoriodividido=0,Media_ph;
     Media_ph=calcular_sumatorio_ph(fuentes,num_fuentes)/num_fuentes;
-    printf("%f\n", Media_ph);
-    for(i=0;i<num_fuentes;i++){
-    	sumatorio_de_cuadrados+=pow((fuentes[i].ph-Media_ph),2);
+    int j;
+    for(j=0;j<num_fuentes;j++){
+  
+    	sumatorio_de_cuadrados+=((fuentes[j].ph-Media_ph)*(fuentes[j].ph-Media_ph));
 	}
-	printf("%f\n", sumatorio_de_cuadrados);
+	sumatoriodividido=sumatorio_de_cuadrados/num_fuentes;
+    return sqrt(sumatoriodividido);
+}
+float calcular_desviaciontipica_Conductividad(Barrio fuentes[], int num_fuentes){
+    int i;
+    float sumatorio_de_cuadrados=0.0,sumatoriodividido=0,Media_conductividad;
+    Media_conductividad=calcular_sumatorio_conductividad(fuentes,num_fuentes)/num_fuentes;
+    int j;
+    for(j=0;j<num_fuentes;j++){
+  
+    	sumatorio_de_cuadrados+=((fuentes[j].conductividad-Media_conductividad)*(fuentes[j].conductividad-Media_conductividad));
+	}
+	sumatoriodividido=sumatorio_de_cuadrados/num_fuentes;
+    return sqrt(sumatoriodividido);
+}
+float calcular_desviaciontipica_turbidez(Barrio fuentes[], int num_fuentes){
+    int i;
+    float sumatorio_de_cuadrados=0.0,sumatoriodividido=0,Media_turbidez;
+    Media_turbidez=calcular_sumatorio_turbidez(fuentes,num_fuentes)/num_fuentes;
+    int j;
+    for(j=0;j<num_fuentes;j++){
+  
+    	sumatorio_de_cuadrados+=((fuentes[j].turbidez-Media_turbidez)*(fuentes[j].turbidez-Media_turbidez));
+	}
+	sumatoriodividido=sumatorio_de_cuadrados/num_fuentes;
+    return sqrt(sumatoriodividido);
+}
+float calcular_desviaciontipica_coliformes(Barrio fuentes[], int num_fuentes){
+    int i;
+    float sumatorio_de_cuadrados=0.0,sumatoriodividido=0,Media_coliformes;
+    Media_coliformes=calcular_sumatorio_coliformes(fuentes,num_fuentes)/num_fuentes;
+    int j;
+    for(j=0;j<num_fuentes;j++){
+  
+    	sumatorio_de_cuadrados+=((fuentes[j].coliformes-Media_coliformes)*(fuentes[j].coliformes-Media_coliformes));
+	}
 	sumatoriodividido=sumatorio_de_cuadrados/num_fuentes;
     return sqrt(sumatoriodividido);
 }
@@ -249,91 +302,120 @@ for (j = 0; j < contador; j++) {
     	Sleep(1000);
 	
     do{
-   printf("Seleccione una opcion:\n");
-	printf("1.Operaciones estadisticas (medias,desviacion tipica)\n");
-	printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n");
-	printf("3.Comparaciones\n");
-	printf("4.Graficos de asteriscos\n");
-	printf("5.Salir del programa\n");
+   printf("Seleccione una opcion:\n\n");
+	printf("1.Operaciones estadisticas (medias,desviacion tipica)\n\n");
+	printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n\n");
+	printf("3.Comparaciones\n\n");
+	printf("4.Graficos de asteriscos\n\n");
+	printf("5.Salir del programa\n\n");
 	scanf("%d",& opcion);
 	}while(opcion<1 || opcion>5);
 		system("cls");
 	   if(opcion==1){
 		do{
 		
-		printf("Seleccione una de las siguientes operaciones estadisticas:\n");
-	    printf("1. Media de los niveles de pH de las fuentes\n");
-	    printf("2.Media de los niveles de conductividad de las fuentes\n");
-	    printf("3.Desviacion tipica del pH con los datos de las fuentes\n");
-	    printf("4. Desviacion tipica de la conductividad con los datos de las fuentes\n");
-	    printf("5.Salir del programa\n");
+		printf("Seleccione una de las siguientes operaciones estadisticas:\n\n");
+	    printf("1. Media de los niveles de pH de las fuentes\n\n");
+	    printf("2.Media de los niveles de conductividad de las fuentes\n\n");
+	    printf("3.Media de los niveles de turbidez de las fuentes\n\n");
+	    printf("4.Media de los niveles de coliformes de las fuentes\n\n");
+	    printf("5.Desviacion tipica y varianza del pH con los datos de las fuentes\n\n");
+	    printf("6. Desviacion tipica y varianza de la conductividad con los datos de las fuentes\n\n");
+	    printf("7. Desviacion tipica y varianza de la turbidez con los datos de las fuentes\n\n");
+	    printf("8. Desviacion tipica y varianza de los coliformes con los datos de las fuentes\n\n");
+	    printf("9.Salir del programa\n\n");
 	    scanf("%d",& segundaopcion);
-		}while(segundaopcion<1 || segundaopcion>5);
+		}while(segundaopcion<1 || segundaopcion>9);
 		
 		system("cls");
 
-		if(segundaopcion==1){
+		if(segundaopcion==1){	
 			float sumatorioph = calcular_sumatorio_ph(Fuentes, contador);
-			printf("La media del pH de todas las fuentes es: %.2f\n", sumatorioph/contador);
+			printf("La media del pH de todas las fuentes es: %.3f\n\n", sumatorioph/contador);
 		}else if(segundaopcion==2){
+			
 			float sumatorioconductividad = calcular_sumatorio_conductividad(Fuentes, contador);
-            printf("La conductividad media es: %.2f\n", sumatorioconductividad/contador);
-		}else if(segundaopcion==3) {
-	
-		 printf("La Desviacion tipica es: %.2f\n",calcular_desviaciontipica_ph(Fuentes, contador));
+            printf("La conductividad media es: %.2f\n\n", sumatorioconductividad/contador);
+        
+		}else if(segundaopcion==3){
 			
-		}else if(segundaopcion==4) {
+			float sumatorioturbidez = calcular_sumatorio_turbidez(Fuentes, contador);
+            printf("La turbidez media de las fuentes es: %.2f\n\n", sumatorioturbidez/contador);
+            
+		}else if(segundaopcion==4){
 			
+            float sumatoriocoliformes = calcular_sumatorio_coliformes(Fuentes, contador);
+            printf("La media de coliformes en el agua de las fuentes es de: %.2f\n\n", sumatoriocoliformes/contador);
+            
 		}else if(segundaopcion==5) {
+	
+		 printf("La Desviacion tipica de los datos del pH es: %.3f\n",calcular_desviaciontipica_ph(Fuentes, contador));
+		 printf("La Varianza de los datos del pH es: %.3f\n\n",(calcular_desviaciontipica_ph(Fuentes, contador)*calcular_desviaciontipica_ph(Fuentes, contador)));	
+		 
+		}else if(segundaopcion==6) {
+			
+		 printf("La Desviacion tipica de los datos de la conductividad es: %.3f\n\n",calcular_desviaciontipica_Conductividad(Fuentes, contador));
+		 printf("La Varianza de los datos de la conductividad es: %.3f\n\n",(calcular_desviaciontipica_Conductividad(Fuentes, contador)*calcular_desviaciontipica_Conductividad(Fuentes, contador)));
+		 	
+		}else if(segundaopcion==7) {
+			
+		 printf("La Desviacion tipica de los datos de la turbidez es: %.3f\n\n",calcular_desviaciontipica_turbidez(Fuentes, contador));
+		 printf("La Varianza de los datos de la turbidez es: %.3f\n\n",(calcular_desviaciontipica_turbidez(Fuentes, contador)*calcular_desviaciontipica_turbidez(Fuentes, contador)));
+		 	
+		}else if(segundaopcion==8) {
+			
+		 printf("La Desviacion tipica de los datos de los coliformes es: %.3f\n\n",calcular_desviaciontipica_coliformes(Fuentes, contador));	
+		 printf("La Varianza de los datos de los coliformes es: %.3f\n\n",(calcular_desviaciontipica_coliformes(Fuentes, contador)*calcular_desviaciontipica_coliformes(Fuentes, contador)));
+		 	
+		}else if(segundaopcion==9) {
+			
 		 printf("Saliendo del programa...Hasta pronto...");
 		 break;
-		}
-		
-		
+		}		
 	} else if(opcion == 2) {
-		do {
 		
-		printf("Selecciona una opcion:\n");
-		printf("1.Informacion sobre la temperatura del agua\n");
-		printf("2.Informacion sobre la potabilidad del agua\n");
-		scanf("%d",&terceraopcion);
+		do {
+		  printf("Selecciona una opcion:\n");
+		  printf("1.Informacion sobre la temperatura del agua\n\n");
+		  printf("2.Informacion sobre la potabilidad del agua\n\n");
+		  scanf("%d",&terceraopcion);
 		}while(terceraopcion<1 || terceraopcion>2);
 		
 		if(terceraopcion==1){
 		  aguacaliente(Fuentes,contador);
-	
 		}else if (terceraopcion==2){
-			aguapotable(Fuentes,contador);
+		  aguapotable(Fuentes,contador);
 		}
 		
 	} else if(opcion==3) {
 		do{
-		printf("Selecciona una opcion:\n");
-		printf("1.Imprimir mayor pH\n");
-		printf("2.Imprimir mayor conductividad\n");
-		scanf("%d",&cuartaopcion);
+		  printf("Selecciona una opcion:\n\n");
+		  printf("1.Imprimir mayor pH\n\n");
+		  printf("2.Imprimir mayor conductividad\n\n");
+		  scanf("%d",&cuartaopcion);
 		}while(cuartaopcion<1 || cuartaopcion>2);
 		
 		if(cuartaopcion==1){
 		  
 			float mayorPh= comparacionpH(Fuentes, contador);
-			printf("El mayor pH es: %.2f\n", mayorPh);
+			printf("El mayor pH es: %.2f\n\n", mayorPh);
 		   
 		}else if(cuartaopcion==2){
 		   	
 			int mayorconductividad= comparacionConductividad(Fuentes, contador);
-			printf("La mayor conductividad es: %d\n", mayorconductividad);
+			printf("La mayor conductividad es: %d\n\n", mayorconductividad);
 		}
 	    
 	}else if(opcion==4) {
 		do{
-	    	printf("Selecciona una opcion:\n");
-		printf("1.Grafico de asteriscos del ph del agua\n");
-		printf("2.Grafico de asteriscos de la conductividad del agua\n");
-		printf("3.Grafico de asteriscos de la turbidez del agua\n");
-		printf("4.Grafico de asteriscos de los coliformes del agua\n");
-		scanf("%d",&quintaopcion);
+	      printf("Selecciona una opcion:\n\n");
+		  printf("1.Grafico de asteriscos del ph del agua\n\n");
+		  printf("2.Grafico de asteriscos de la conductividad del agua\n\n");
+		  printf("3.Grafico de asteriscos de la turbidez del agua\n\n");
+		  printf("4.Grafico de asteriscos de los coliformes del agua\n\n");
+		  scanf("%d",&quintaopcion); 
 		}while(quintaopcion<1 || quintaopcion>4);
+		
 		if(quintaopcion==1){
 		  graficoph(Fuentes,contador);
 		  printf("\n");	   
