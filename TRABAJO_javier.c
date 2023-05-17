@@ -280,16 +280,23 @@ int main() {
     char nombrefichero[100];
 
     funcionmenu();
-     printf("Ingrese el nombre del archivo con los datos de las fuentes: ");
+     printf("Ingrese el nombre del archivo con los datos de las fuentes:\a");// ponemos \a para que pite 
     scanf("%s", nombrefichero);
 
     // Abrir el fichero (modo lectura)
     
     FILE* ficherofuentes;
+    FILE* ficheroresultados;
+    
 	ficherofuentes = fopen(nombrefichero, "r");
+	ficheroresultados = fopen("resultadosfuentes.txt", "w");
     //Si no se encuentra el fichero, el programa emite un mensaje dando un aviso
     if (ficherofuentes == NULL) {
 		printf("Error, no puede abrirse el fichero.\n");   
+		return 0;
+	} 
+	if (ficheroresultados == NULL) {
+		printf("Error, no puede crear el fichero.\n");   
 		return 0;
 	} 
 	
@@ -308,7 +315,6 @@ int main() {
     printf("Hay un total de %d fuentes\n", contador);
     // Cerrar el archivo
     fclose(ficherofuentes);
-
     // Imprimir los datos por pantalla
     int j;
 for (j = 0; j < contador; j++) {
@@ -326,7 +332,7 @@ for (j = 0; j < contador; j++) {
 	
     do{
    printf("Seleccione una opcion:\n\n");
-	printf("1.Operaciones estadisticas (medias,desviacion tipica)\n\n");
+	printf("1.Operaciones estadisticas (medias,desviacion tipica)\n\n\a");
 	printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n\n");
 	printf("3.Comparaciones\n\n");
 	printf("4.Graficos de asteriscos\n\n");
@@ -354,41 +360,50 @@ for (j = 0; j < contador; j++) {
 		if(segundaopcion==1){	
 			float sumatorioph = calcular_sumatorio_ph(Fuentes, contador);
 			printf("La media del pH de todas las fuentes es: %.3f\n\n", sumatorioph/contador);
+			fprintf(ficheroresultados,"La media del pH de todas las fuentes es: %.3f\n\n", sumatorioph/contador);
 		}else if(segundaopcion==2){
 			
 			float sumatorioconductividad = calcular_sumatorio_conductividad(Fuentes, contador);
             printf("La conductividad media es: %.2f\n\n", sumatorioconductividad/contador);
+            fprintf(ficheroresultados,"La conductividad media es: %.2f\n\n", sumatorioconductividad/contador);
         
 		}else if(segundaopcion==3){
 			
 			float sumatorioturbidez = calcular_sumatorio_turbidez(Fuentes, contador);
             printf("La turbidez media de las fuentes es: %.2f\n\n", sumatorioturbidez/contador);
+           fprintf(ficheroresultados,"La turbidez media de las fuentes es: %.2f\n\n", sumatorioturbidez/contador);
             
 		}else if(segundaopcion==4){
 			
             float sumatoriocoliformes = calcular_sumatorio_coliformes(Fuentes, contador);
             printf("La media de coliformes en el agua de las fuentes es de: %.2f\n\n", sumatoriocoliformes/contador);
+            fprintf(ficheroresultados,"La media de coliformes en el agua de las fuentes es de: %.2f\n\n", sumatoriocoliformes/contador);
             
 		}else if(segundaopcion==5) {
 	
-		 printf("La Desviacion tipica de los datos del pH es: %.3f\n",calcular_desviaciontipica_ph(Fuentes, contador));
+		 printf("La Desviacion tipica de los datos del pH es: %.3f\n\n",calcular_desviaciontipica_ph(Fuentes, contador));
+		 fprintf(ficheroresultados,"La Desviacion tipica de los datos del pH es: %.3f\n\n",calcular_desviaciontipica_ph(Fuentes, contador));
 		 printf("La Varianza de los datos del pH es: %.3f\n\n",(calcular_desviaciontipica_ph(Fuentes, contador)*calcular_desviaciontipica_ph(Fuentes, contador)));	
+		 fprintf(ficheroresultados,"La Varianza de los datos del pH es: %.3f\n\n",(calcular_desviaciontipica_ph(Fuentes, contador)*calcular_desviaciontipica_ph(Fuentes, contador)));
 		 
 		}else if(segundaopcion==6) {
 			
 		 printf("La Desviacion tipica de los datos de la conductividad es: %.3f\n\n",calcular_desviaciontipica_Conductividad(Fuentes, contador));
+		 fprintf(ficheroresultados,"La Desviacion tipica de los datos de la conductividad es: %.3f\n\n",calcular_desviaciontipica_Conductividad(Fuentes, contador));
 		 printf("La Varianza de los datos de la conductividad es: %.3f\n\n",(calcular_desviaciontipica_Conductividad(Fuentes, contador)*calcular_desviaciontipica_Conductividad(Fuentes, contador)));
-		 	
+		 fprintf(ficheroresultados,"La Varianza de los datos de la conductividad es: %.3f\n\n",(calcular_desviaciontipica_Conductividad(Fuentes, contador)*calcular_desviaciontipica_Conductividad(Fuentes, contador)));
 		}else if(segundaopcion==7) {
 			
 		 printf("La Desviacion tipica de los datos de la turbidez es: %.3f\n\n",calcular_desviaciontipica_turbidez(Fuentes, contador));
+		 fprintf(ficheroresultados,"La Desviacion tipica de los datos de la turbidez es: %.3f\n\n",calcular_desviaciontipica_turbidez(Fuentes, contador));
 		 printf("La Varianza de los datos de la turbidez es: %.3f\n\n",(calcular_desviaciontipica_turbidez(Fuentes, contador)*calcular_desviaciontipica_turbidez(Fuentes, contador)));
-		 	
+		 fprintf(ficheroresultados,"La Varianza de los datos de la turbidez es: %.3f\n\n",(calcular_desviaciontipica_turbidez(Fuentes, contador)*calcular_desviaciontipica_turbidez(Fuentes, contador)));	
 		}else if(segundaopcion==8) {
 			
-		 printf("La Desviacion tipica de los datos de los coliformes es: %.3f\n\n",calcular_desviaciontipica_coliformes(Fuentes, contador));	
+		 printf("La Desviacion tipica de los datos de los coliformes es: %.3f\n\n",calcular_desviaciontipica_coliformes(Fuentes, contador));
+		 fprintf(ficheroresultados,"La Desviacion tipica de los datos de los coliformes es: %.3f\n\n",calcular_desviaciontipica_coliformes(Fuentes, contador));	
 		 printf("La Varianza de los datos de los coliformes es: %.3f\n\n",(calcular_desviaciontipica_coliformes(Fuentes, contador)*calcular_desviaciontipica_coliformes(Fuentes, contador)));
-		 	
+		fprintf(ficheroresultados,"La Varianza de los datos de los coliformes es: %.3f\n\n",(calcular_desviaciontipica_coliformes(Fuentes, contador)*calcular_desviaciontipica_coliformes(Fuentes, contador)));	
 		}else if(segundaopcion==9) {
 			
 		 printf("Saliendo del programa...Hasta pronto...");
@@ -422,11 +437,12 @@ for (j = 0; j < contador; j++) {
 		  
 			float mayorPh= comparacionpH(Fuentes, contador);
 			printf("El mayor pH es: %.2f\n\n", mayorPh);
-		   
+		    fprintf(ficheroresultados,"El mayor pH es: %.2f\n\n", mayorPh);
 		}else if(cuartaopcion==2){
 		   	
 			int mayorconductividad= comparacionConductividad(Fuentes, contador);
 			printf("La mayor conductividad es: %d\n\n", mayorconductividad);
+			fprintf(ficheroresultados, "La mayor conductividad es: %d\n\n", mayorconductividad);
 		}
 	    
 	}else if(opcion==4) {
@@ -460,7 +476,7 @@ for (j = 0; j < contador; j++) {
 	
 }
  
-
+	fclose(ficheroresultados);
    return 0;
 }
 
