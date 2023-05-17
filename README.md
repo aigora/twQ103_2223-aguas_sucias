@@ -1,8 +1,12 @@
 # Medio Ambiente
 
-[Descripción breve del proyecto a realizar (2-3 frases).]
+Trabajo sobre las diferentes fuentes de distintos barrios y sus parametros(pH,conductividad,turbidez,coliformes),
+con los cuales podemos informarnos sobre algunas operaciones estadisticas(media,desviacion tipica,varianza...)
+e incluso sobre las caracteristicas del agua, es decir, si es o no potable o si esta o no fria.
+Ademas de tambien saber que conductividad o ph es mayor de entre todas las fuentes y realizarnos unos graficos de asteriscos por cada parametro y cada fuente.
 
 ## Integrantes del equipo
+
 Claudia Aguilar Garcia
  claudiaaguilar
 
@@ -17,4 +21,8 @@ Reiwaj
 
 ## Objetivos del trabajo
 
-[Lista de los objetivos que se persiguen con el trabajo propuesto.]
+1- Leer datos de los ficheros para trabajar con ellos
+2- Estructurar el programa en funciones
+3- Utilizar lo aprendido en estadistica para estudiar los datos
+4-Ser original graficando con asteriscos
+5- Crear informes con los datos obtenidos por el usuario
