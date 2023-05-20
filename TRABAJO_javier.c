@@ -414,7 +414,7 @@ for (j = 0; j < contador; j++) {
 	printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n\n");
 	printf("3.Comparaciones\n\n");
 	printf("4.Graficos de asteriscos\n\n");
-	printf("5.Fusionador ficheros de un anio\n");
+	printf("5.Fusionador ficheros de Quintana de un anio entero\n\n");
 	printf("6.Salir del programa\n\n");
 	scanf("%d",& opcion);
 	}while(opcion<1 || opcion>6);
