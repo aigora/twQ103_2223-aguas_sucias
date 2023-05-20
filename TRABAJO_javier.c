@@ -13,6 +13,84 @@ typedef struct {
     int turbidez;
     int coliformes;
 } Barrio;
+void leerPrimerFicheroQ() {
+    FILE* fichero_lectura; 
+    FILE* fichero_fusion; 
+    
+    fichero_lectura = fopen("202201_Quintana.csv.txt", "r");
+    fichero_fusion = fopen("fusion.txt", "w");
+    if (fichero_lectura == NULL || fichero_fusion == NULL) {
+        printf("Error al abrir los ficheros.\n");
+        return;
+    }
+
+    char nombres[5][50];//Aquí decaramos una matriz de caracteres bidimensional llamada nombres con 5 filas una cadena de caracteres 
+    Barrio barrio;
+    int i;
+
+    // Leemos y escaneamos los 5 primeros nombres que son (nombre, pH Conductividad, turbidez y coliformes.
+    for (i = 0; i < 5; i++) {
+        fscanf(fichero_lectura, "%s", nombres[i]);
+    }
+
+    
+    for (i = 0; i < 5; i++) {// y los escribimos en el fichero fusion.txt
+        fprintf(fichero_fusion, "%s ", nombres[i]);
+    }
+    fprintf(fichero_fusion, "\n");
+
+    // Leemos el resto de datos y los imprimimos en el fichero fusion.txt
+    while (fscanf(fichero_lectura, "%s %f %d %d %d",
+                  barrio.nombre, &barrio.ph, &barrio.conductividad, &barrio.turbidez, &barrio.coliformes) == 5) {
+        fprintf(fichero_fusion, "%s %.2f %d %d %d\n",
+                barrio.nombre, barrio.ph, barrio.conductividad, barrio.turbidez, barrio.coliformes);
+    }
+
+    fclose(fichero_lectura);
+    fclose(fichero_fusion);// cerramos ambos ficheros 
+}
+
+void fusionarFicherosQ() {
+    FILE* fichero_fusion;
+    
+    fichero_fusion = fopen("fusion.txt", "a");// abrimos de nuevo ficherofusion.txt modo 'a' que permite añadir datos al fichero
+    
+    if (fichero_fusion == NULL) {
+        printf("Error al abrir el fichero de fusión.\n");
+        return;
+    }
+
+    int i;
+
+    for (i = 2; i <= 12; i++) {
+        char nombre_fichero[50];
+        sprintf(nombre_fichero, "2022%02d_Quintana.csv.txt", i);
+
+        FILE* fichero_lectura = fopen(nombre_fichero, "r");
+
+        if (fichero_lectura == NULL) {
+            printf("Error al abrir el fichero %s.\n", nombre_fichero);
+            continue;
+        }
+
+        char linea[100];
+
+        // Ignorar la primera línea
+        fgets(linea, sizeof(linea), fichero_lectura);
+
+        // Salto de línea antes de imprimir el contenido del siguiente fichero
+        fprintf(fichero_fusion, "\n");
+
+        // Copiar el contenido del fichero al fichero fusion.txt
+        while (fgets(linea, sizeof(linea), fichero_lectura) != NULL) {
+            fprintf(fichero_fusion, "%s", linea);
+        }
+
+        fclose(fichero_lectura);
+    }
+
+    fclose(fichero_fusion);
+}
 // Comienzo de definicion de funciones
 // Usamos esta funcion para crear un grafico con asteriscos del ph (si el ph es 7.6 lo redondearia a 8 y entonces imprimiria por pantalla 8 asteriscos, mientras que si es un numero entero lo dejaria tal cual)
 void graficoph(Barrio fuentes[], int num_fuentes) {
@@ -336,9 +414,10 @@ for (j = 0; j < contador; j++) {
 	printf("2.Caracteristicas del agua (potable o no, caliente o fria...)\n\n");
 	printf("3.Comparaciones\n\n");
 	printf("4.Graficos de asteriscos\n\n");
-	printf("5.Salir del programa\n\n");
+	printf("5.Fusionador ficheros de un anio\n");
+	printf("6.Salir del programa\n\n");
 	scanf("%d",& opcion);
-	}while(opcion<1 || opcion>5);
+	}while(opcion<1 || opcion>6);
 		system("cls");
 	   if(opcion==1){
 		do{
@@ -469,6 +548,11 @@ for (j = 0; j < contador; j++) {
 			printf("\n");
 	    }	
 	}else if(opcion==5){
+	  leerPrimerFicheroQ();
+     fusionarFicherosQ();
+     printf("Se ha creado correctamente el fichero fusion.txt con los datos de las fuentes de todo un anio.\nAhora sal del programa e ingrese el fichero fusion.txt para trabajar con el");
+		break;
+	}else if(opcion==6){
 	 printf("Saliendo del programa...Hasta pronto...");
 	  // Al poner un break lo que hacemos es salir del programa
 		break;
